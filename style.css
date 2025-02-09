@@ -1,0 +1,159 @@
+/* Global reset and box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Body styling with a white background */
+  body {
+    background-color: #fff;  /* Set the background to white */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* The container for the flip card */
+  .flip-card {
+    background-color: transparent;
+    width: 400px;
+    height: 500px;
+    perspective: 1000px;  /* Maintain perspective for 3D flip */
+  }
+  
+  /* Inner container with 3D transform settings */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;  /* Ensure this is enabled */
+    transition: transform 1s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+  }
+  
+  /* When the card is flipped, rotate the inner container */
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Front and back faces styling */
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    backface-visibility: hidden;  /* Hide the backface when flipped */
+    overflow: hidden;
+  }
+  
+  /* Front side of the card (The Letter) */
+  .flip-card-front {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 3px solid #cc3366; /* Add border around the whole card */
+    border-radius: 15px;
+  }
+  
+  .flip-card-front h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    color: #cc3366;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .letter {
+    width: 100%;
+    height: 100%;
+    background-color: #fff5f5;
+    border: 3px solid #cc3366;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    transform: scaleY(1);  /* Set this to 1 initially */
+    transform-origin: top;
+    transition: transform 1s ease-in-out;
+  }
+  
+  .letter.open {
+    transform: scaleY(1);  /* Keeps it open once clicked */
+  }
+  
+  /* Button styles inside the letter */
+  .button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .button-container button {
+    background-color: #cc3366;
+    border: none;
+    color: #fff;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+  
+  .button-container button:hover {
+    background-color: #b32d5c;
+    transform: scale(1.05);
+  }
+  
+  /* Back side of the card (The Surprise) */
+  .flip-card-back {
+    background: #fff;
+    transform: rotateY(180deg);  /* Ensure it's flipped to the back */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .flip-card-back h2 {
+    font-family: 'Playfair Display', serif;
+    color: #cc3366;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .flip-card-back p {
+    font-size: 1.2em;
+    color: #cc3366;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .flip-card-back img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 20px;
+  }
+  
+  /* Optional: Shake animation for a playful “No” feedback */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    animation: shake 0.5s;
+  }
+  
